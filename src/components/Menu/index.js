@@ -6,7 +6,7 @@ export const Menu = () => {
         <div>
             <Link to="/listar">Listar</Link>
             <Link to="/cadastrar">Cadastrar</Link>
-            <Link to="/visualizar">Visualizar</Link>
+            
         </div> 
     )
 }

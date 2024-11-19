@@ -37,6 +37,9 @@ export const Listar = () =>{
     return(
         <div>
             <h1>Listar</h1>
+
+            <Link to="/cadastrar"><button type="button">Cadastrar</button></Link>
+            <hr></hr>
             <thead>
                 <tr>
                     <td>Id</td>
