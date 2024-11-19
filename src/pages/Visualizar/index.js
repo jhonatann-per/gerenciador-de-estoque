@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Menu } from "../../components/Menu";
+import { useParams } from "react-router-dom";
 
-export const Visualizar = () =>{
+export const Visualizar = (props) =>{
 
-    const names = {
-        nome1: "Visualizar",
-        nome2: "Teste2"
-    }
+    const {id} = useParams();
+    const [data, setData] = useState([])
 
+    useEffect(() =>{
+        const getProduto = async () => {
+            setData(
+                {
+                    id: 1,
+                    nome: "Teclado",
+                    valor: 120.00,
+                    quantidade: 25
+                },
+                
+            )
+        }
+        getProduto();
+
+    },[id])
+    
     return(
         <div>
-            <h1>{names.nome2}</h1>
+            <Menu/>
+            <h1>Visualizar</h1>
+            <span> {data.id} </span>
+            <span> {data.nome} </span>
+            <span> {data.valor} </span>
+            <span> {data.quantidade} </span>
         </div>
     )
 }

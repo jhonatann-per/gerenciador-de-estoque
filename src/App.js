@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Dashboard} from "./pages/Dashboard";
-import {Listar} from "./pages/Listar";
-import {Visualizar} from "./pages/Visualizar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Dashboard } from "./pages/Dashboard";
+import { Listar } from "./pages/Listar";
+import { Visualizar } from "./pages/Visualizar";
 import { Cadastrar } from "./pages/Cadastrar";
 import { Editar } from "./pages/Editar";
 
@@ -11,11 +11,11 @@ const App = () => {
     <div>
      <Router>
       <Routes>
-        <Route exact path="/" Component={Dashboard} />
-        <Route exact path="/cadastrar" Component={Cadastrar} />
-        <Route exact path="/editar" Component={Editar} />
-        <Route exact path="/listar" Component={Listar} />
-        <Route exact path="/visualizar" Component={Visualizar} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/cadastrar" element={<Cadastrar />} />
+        <Route path="/editar" element={<Editar />} />
+        <Route path="/listar" element={<Listar />} />
+        <Route path="/visualizar/:id" element={<Visualizar />} />
       </Routes>
      </Router>
     </div>

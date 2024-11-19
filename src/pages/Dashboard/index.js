@@ -1,11 +1,13 @@
 import React from 'react';
+import { Menu } from '../../components/Menu';
 
 export const Dashboard = () => {
-
     return(
-        <div>
-            <h1> Dashboard </h1>
-        </div>
+        
+       <div>
+            <Menu></Menu>
+            Dashboard
+        </div> 
     )
 }
 

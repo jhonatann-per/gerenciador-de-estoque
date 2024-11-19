@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Listar = () =>{
     const [data, setData] = useState([]);
-
-    const listarProdutos = async => {
-        var produtos = [
+    
+    const listarProduto = async => {
+        var produto = [
             {
                 "id": 1,
                 "nome": "Teclado",
@@ -24,17 +25,18 @@ export const Listar = () =>{
                 "quantidade": 25
             }
         ] 
-        setData(produtos);
+        setData(produto);
         console.log('Esta é uma mensagem de log');
 
     }
 
     useEffect(() =>{
-        listarProdutos();
+        listarProduto();
     },[])
 
     return(
         <div>
+            <h1>Listar</h1>
             <thead>
                 <tr>
                     <td>Id</td>
@@ -44,13 +46,15 @@ export const Listar = () =>{
                 </tr>
             </thead>
             <tbody>
-                {data.map(produtos =>(
-                    <tr key={produtos.id}>
-                        <td>{produtos.id}</td>
-                        <td>{produtos.nome}</td>
-                        <td>{produtos.valor}</td>
-                        <td>{produtos.quantidade}</td>
-                        <td>Visualizar Editar Apagar</td>
+                {data.map(produto =>(
+                    <tr key={produto.id}>
+                        <td>{produto.id}</td>
+                        <td>{produto.nome}</td>
+                        <td>{produto.valor}</td>
+                        <td>{produto.quantidade}</td>
+                        <td>
+                            <Link to={"/visualizar/" + produto.id} ><button>Visualizar</button></Link>
+                        </td>
                     </tr>
                 ))}
             </tbody>
