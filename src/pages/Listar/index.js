@@ -26,7 +26,6 @@ export const Listar = () =>{
             }
         ] 
         setData(produto);
-        console.log('Esta é uma mensagem de log');
 
     }
 
@@ -57,6 +56,7 @@ export const Listar = () =>{
                         <td>{produto.quantidade}</td>
                         <td>
                             <Link to={"/visualizar/" + produto.id} ><button>Visualizar</button></Link>
+                            <Link to={"/editar/" + produto.id} ><button>Editar</button></Link>
                         </td>
                     </tr>
                 ))}
