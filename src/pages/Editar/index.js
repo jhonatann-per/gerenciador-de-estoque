@@ -10,9 +10,9 @@ export const Editar = (props) =>{
     const [valor, setValor] = useState("");
     const [quantidade, setQuantidade] = useState("");
     
-    const editeProduto = async e =>{
+    const editarProduto = async e =>{
         e.preventDefault();
-        console.log("Nome" + nome)
+        console.log("Nome: " + nome + "valor: R$" + valor )
     }
 
     useEffect(() =>{
@@ -28,7 +28,7 @@ export const Editar = (props) =>{
     return(
         <div>
             <Menu/>
-            <form onSubmit={editeProduto} >
+            <form onSubmit={editarProduto} >
                 <label >Nome:</label>
                 <input type="text" name="nome" 
                 placeholder="Nome Do Produto" value={nome} 
@@ -45,7 +45,7 @@ export const Editar = (props) =>{
                  onChange={e => setQuantidade(e.target.value)}
                 /> <br></br>
             
-                <button type="submit">Salvar</button>
+                <button type="submit">Salvar Alteração</button>
             </form>
         </div>
     )

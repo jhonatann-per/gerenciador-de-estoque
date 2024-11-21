@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const Listar = () =>{
-    const [data, setData] = useState([]);
     
+    const { state } = useLocation();
+    const [status, setStatus] = useState({
+        type: state ? state.type : "",
+        mensagem: state ? state.mensagem : ""
+    })
+    const [data, setData] = useState([]);
+
     const listarProduto = async => {
         var produto = [
             {
@@ -33,9 +39,15 @@ export const Listar = () =>{
         listarProduto();
     },[])
 
+    const apagarProduto = async (idProduto) =>{
+        console.log("Produto apagado:" + idProduto)
+    }
+
     return(
         <div>
             <h1>Listar</h1>
+
+            {status.type === "success" ? <p style={{color: "blue"}}>{status.mensagem}</p> : ""}
 
             <Link to="/cadastrar"><button type="button">Cadastrar</button></Link>
             <hr></hr>
@@ -57,6 +69,10 @@ export const Listar = () =>{
                         <td>
                             <Link to={"/visualizar/" + produto.id} ><button>Visualizar</button></Link>
                             <Link to={"/editar/" + produto.id} ><button>Editar</button></Link>
+                            <Link to={"#"}><button 
+                            onClick={() => apagarProduto(produto.id)}
+                            >Deletar</button>
+                            </Link>
                         </td>
                     </tr>
                 ))}

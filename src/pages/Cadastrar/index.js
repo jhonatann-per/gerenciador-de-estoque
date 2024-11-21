@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Menu } from "../../components/Menu"
+import { Navigate } from "react-router-dom"
 
 export const Cadastrar = () =>{
 
@@ -7,6 +8,11 @@ export const Cadastrar = () =>{
         nome: '',
         valor: '',
         quantidade: ''
+    })
+
+    const [status, setStatus] = useState({
+        type: '',
+        mensagem:''
     })
 
     const valueInput = e => setProduto({
@@ -17,11 +23,33 @@ export const Cadastrar = () =>{
     const addProduto = async e => {
         e.preventDefault()
         console.log("Nome: " + produto.nome)
+        setStatus({
+            type: 'error',
+            mensagem: 'Erro: Produto Não Cadastrado.'
+        });
+        // setStatus({
+        //     type: 'success',
+        //     mensagem: 'Produto Cadastrado Com Sucesso!'
+        // });
+        // setStatus({
+        //     type: 'redSuccess',
+        //     mensagem: 'Produto Cadastrado Com Sucesso!'
+        // })
     }
 
     return(
         <div>
             <Menu/>
+            
+            <h1>Cadastrar</h1>
+
+            {status.type === 'error' ? <p style={{color: "#ff0000"}}>{status.mensagem}</p> :""}
+            {status.type === 'success' ? <p style={{color: "green"}}>{status.mensagem}</p> :""}
+            {status.type === 'redSuccess' && (
+            <Navigate to="/listar" state={{ type: 'success', mensagem: status.mensagem }} replace />
+)}
+
+
             <form onSubmit={addProduto}>
                 <label>Nome:</label>
                 <input type="text" name="nome" placeholder="Nome Do Produto" onChange={valueInput}/> <br></br>
