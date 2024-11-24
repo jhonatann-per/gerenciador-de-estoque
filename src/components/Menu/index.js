@@ -1,12 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { NavList } from "./styles";
 
 export const Menu = () => {
     return(
-        <div>
-            <Link to="/listar">Listar</Link>
-            <Link to="/cadastrar">Cadastrar</Link>
+        <NavList>
+            <NavLink to="/listar"><li>Listar</li></NavLink>
+            <NavLink to="/"><li>Dashboard</li></NavLink>
             
-        </div> 
+        </NavList> 
     )
 }

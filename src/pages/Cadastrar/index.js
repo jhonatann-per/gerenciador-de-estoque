@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Menu } from "../../components/Menu"
 import { Navigate } from "react-router-dom"
+import { Container, ConteudoTitulo, Titulo} from '../../styles/styles_global'
 
 export const Cadastrar = () =>{
 
@@ -28,20 +29,18 @@ export const Cadastrar = () =>{
             mensagem: 'Erro: Produto Não Cadastrado.'
         });
         // setStatus({
-        //     type: 'success',
-        //     mensagem: 'Produto Cadastrado Com Sucesso!'
-        // });
-        // setStatus({
         //     type: 'redSuccess',
         //     mensagem: 'Produto Cadastrado Com Sucesso!'
         // })
     }
 
     return(
-        <div>
+        <Container>
             <Menu/>
             
-            <h1>Cadastrar</h1>
+            <ConteudoTitulo>
+                <Titulo>Cadastrar</Titulo>
+            </ConteudoTitulo>
 
             {status.type === 'error' ? <p style={{color: "#ff0000"}}>{status.mensagem}</p> :""}
             {status.type === 'success' ? <p style={{color: "green"}}>{status.mensagem}</p> :""}
@@ -62,6 +61,6 @@ export const Cadastrar = () =>{
             
             <button type="submit">Cadastrar</button>
             </form>
-        </div>
+        </Container>
     )
 }

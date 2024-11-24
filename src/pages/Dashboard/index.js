@@ -1,13 +1,17 @@
 import React from 'react';
 import { Menu } from '../../components/Menu';
 
+import { Container, ConteudoTitulo, Titulo} from '../../styles/styles_global'
+
 export const Dashboard = () => {
     return(
         
-       <div>
+       <Container>
             <Menu></Menu>
-            Dashboard
-        </div> 
+            <ConteudoTitulo>
+                <Titulo>Dashboard</Titulo>
+            </ConteudoTitulo>
+        </Container> 
     )
 }
 

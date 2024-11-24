@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Container, ConteudoTitulo, Titulo} from '../../styles/styles_global'
+import { Menu } from "../../components/Menu";
 
 export const Listar = () =>{
     
@@ -44,12 +46,16 @@ export const Listar = () =>{
     }
 
     return(
-        <div>
-            <h1>Listar</h1>
+        <Container>
+            <Menu />
+            <ConteudoTitulo>
+                <Titulo>Listar</Titulo>
+                <Link to="/cadastrar"><button type="button">Cadastrar</button></Link>
+            </ConteudoTitulo>
 
             {status.type === "success" ? <p style={{color: "blue"}}>{status.mensagem}</p> : ""}
 
-            <Link to="/cadastrar"><button type="button">Cadastrar</button></Link>
+            
             <hr></hr>
             <thead>
                 <tr>
@@ -77,6 +83,6 @@ export const Listar = () =>{
                     </tr>
                 ))}
             </tbody>
-        </div>
+        </Container>
     );
 }
