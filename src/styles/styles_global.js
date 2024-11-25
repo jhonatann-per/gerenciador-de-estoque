@@ -11,6 +11,8 @@ export const ConteudoTitulo = styled.section`
     justify-content: space-between;
 `;
 
+
+
 export const Titulo = styled.h1`
     font-size: 23px;
     font-family: sans-serif;

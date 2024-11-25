@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "../../components/Menu";
 import { useParams } from "react-router-dom";
+import { Container, ConteudoTitulo, Titulo} from '../../styles/styles_global'
+
 
 export const Visualizar = (props) =>{
 
@@ -24,13 +26,13 @@ export const Visualizar = (props) =>{
     },[id])
     
     return(
-        <div>
+        <Container>
             <Menu/>
             <h1>Visualizar</h1>
             <span> {data.id} </span>
             <span> {data.nome} </span>
             <span> {data.valor} </span>
             <span> {data.quantidade} </span>
-        </div>
+        </Container>
     )
 }

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Container, ConteudoTitulo, Titulo} from '../../styles/styles_global'
+import { BotaoAcao, ButtonSuccess, Table, 
+    ButtonVisualizar, ButtonEditar, ButtonApagar 
+} from "./styles";
+
 import { Menu } from "../../components/Menu";
 
 export const Listar = () =>{
@@ -42,7 +46,7 @@ export const Listar = () =>{
     },[])
 
     const apagarProduto = async (idProduto) =>{
-        console.log("Produto apagado:" + idProduto)
+        alert("Produto apagado com sucesso ID do produto: " + idProduto)
     }
 
     return(
@@ -50,39 +54,47 @@ export const Listar = () =>{
             <Menu />
             <ConteudoTitulo>
                 <Titulo>Listar</Titulo>
-                <Link to="/cadastrar"><button type="button">Cadastrar</button></Link>
+                <BotaoAcao>
+                    <Link to="/cadastrar">
+                        <ButtonSuccess type="button">Cadastrar</ButtonSuccess>
+                    </Link>
+                </BotaoAcao>
             </ConteudoTitulo>
 
             {status.type === "success" ? <p style={{color: "blue"}}>{status.mensagem}</p> : ""}
 
             
-            <hr></hr>
-            <thead>
-                <tr>
-                    <td>Id</td>
-                    <td>Nome</td>
-                    <td>Valor</td>
-                    <td>Quantidade</td>
-                </tr>
-            </thead>
-            <tbody>
-                {data.map(produto =>(
-                    <tr key={produto.id}>
-                        <td>{produto.id}</td>
-                        <td>{produto.nome}</td>
-                        <td>{produto.valor}</td>
-                        <td>{produto.quantidade}</td>
-                        <td>
-                            <Link to={"/visualizar/" + produto.id} ><button>Visualizar</button></Link>
-                            <Link to={"/editar/" + produto.id} ><button>Editar</button></Link>
-                            <Link to={"#"}><button 
-                            onClick={() => apagarProduto(produto.id)}
-                            >Deletar</button>
-                            </Link>
-                        </td>
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Valor</th>
+                        <th>Quantidade</th>
+                        <th>Funções</th>
                     </tr>
-                ))}
-            </tbody>
+                </thead>
+                <tbody>
+                    {data.map(produto =>(
+                        <tr key={produto.id}>
+                            <td>{produto.id}</td>
+                            <td>{produto.nome}</td>
+                            <td>{produto.valor}</td>
+                            <td>{produto.quantidade}</td>
+                            <td>
+                                <Link to={"/visualizar/" + produto.id} ><ButtonVisualizar>Visualizar</ButtonVisualizar></Link>
+                                <Link to={"/editar/" + produto.id} ><ButtonEditar>Editar</ButtonEditar></Link>
+                                <Link to={"#"}><ButtonApagar
+                                onClick={() => apagarProduto(produto.id)}
+                                >Apagar</ButtonApagar>
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+
+            
         </Container>
     );
 }
