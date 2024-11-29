@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Container, ConteudoTitulo, Titulo} from '../../styles/styles_global'
-import { BotaoAcao, ButtonSuccess, Table, 
-    ButtonVisualizar, ButtonEditar, ButtonApagar 
-} from "./styles";
+import { 
+    Container, ConteudoTitulo, 
+    Titulo, BotaoAcao, 
+    ButtonSuccess,  ButtonVisualizar} from '../../styles/styles_global';
+import { 
+    Table, ButtonEditar, 
+    ButtonApagar, AlertSucess } from "./styles";
 
 import { Menu } from "../../components/Menu";
 
@@ -61,7 +64,7 @@ export const Listar = () =>{
                 </BotaoAcao>
             </ConteudoTitulo>
 
-            {status.type === "success" ? <p style={{color: "blue"}}>{status.mensagem}</p> : ""}
+            {status.type === "success" ? <AlertSucess>{status.mensagem}</AlertSucess> : ""}
 
             
             <Table>

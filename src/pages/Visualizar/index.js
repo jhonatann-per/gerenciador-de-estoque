@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "../../components/Menu";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { Container, ConteudoTitulo, Titulo} from '../../styles/styles_global'
+import { Container, 
+    ConteudoTitulo, 
+    Titulo, 
+    BotaoAcao, 
+    ButtonInfo,
+    Hr
+} from '../../styles/styles_global'
+import { ConteudoVisualizar } from "./styles";
 
 
 export const Visualizar = (props) =>{
@@ -28,11 +36,23 @@ export const Visualizar = (props) =>{
     return(
         <Container>
             <Menu/>
-            <h1>Visualizar</h1>
-            <span> {data.id} </span>
-            <span> {data.nome} </span>
-            <span> {data.valor} </span>
-            <span> {data.quantidade} </span>
+            <ConteudoTitulo>
+                <Titulo>Visualizar</Titulo>
+                <BotaoAcao>
+                    <Link to="/listar">
+                        <ButtonInfo type="button" >Listar</ButtonInfo>
+                    </Link>
+                    <Link to={"/editar/" + data.id}>
+                        <ButtonInfo type="button" >Editar</ButtonInfo>
+                    </Link>
+                </BotaoAcao>
+            </ConteudoTitulo>
+            <Hr/>
+
+            <ConteudoVisualizar> ID: {data.id} </ConteudoVisualizar>
+            <ConteudoVisualizar> Produto: {data.nome} </ConteudoVisualizar>
+            <ConteudoVisualizar> Valor: {data.valor} </ConteudoVisualizar>
+            <ConteudoVisualizar> Quantidade: {data.quantidade} </ConteudoVisualizar>
         </Container>
     )
 }

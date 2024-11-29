@@ -7,7 +7,6 @@ export const Menu = () => {
         <NavList>
             <NavLink to="/listar"><li>Listar</li></NavLink>
             <NavLink to="/"><li>Dashboard</li></NavLink>
-            
         </NavList> 
     )
 }

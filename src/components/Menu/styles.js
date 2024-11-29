@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const NavList = styled.ul`
     display: flex;
     justify-content: center;
+    color: black;
     background-color: blue;
     padding: 15px 5px;
     font-family: sans-serif;
