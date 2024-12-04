@@ -1,48 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Menu } from "../../components/Menu";
 import { 
     Container, ConteudoTitulo, 
     Titulo, BotaoAcao, 
-    ButtonSuccess,  ButtonVisualizar} from '../../styles/styles_global';
+    ButtonSuccess,  ButtonVisualizar, AlertError} from '../../styles/styles_global';
 import { 
     Table, ButtonEditar, 
     ButtonApagar, AlertSucess } from "./styles";
 
-import { Menu } from "../../components/Menu";
+import api from "../../config/configApi";
 
-export const Listar = () =>{
+export const Listar = () => {
     
     const { state } = useLocation();
     const [status, setStatus] = useState({
         type: state ? state.type : "",
         mensagem: state ? state.mensagem : ""
-    })
+    });
     const [data, setData] = useState([]);
 
-    const listarProduto = async => {
-        var produto = [
-            {
-                "id": 1,
-                "nome": "Teclado",
-                "valor": 120.00,
-                "quantidade": 25
-            },
-            {
-                "id": 2,
-                "nome": "Mouse",
-                "valor": 80.00,
-                "quantidade": 25
-            },
-            {
-                "id": 3,
-                "nome": "Caderno",
-                "valor": 20.00,
-                "quantidade": 25
+    const listarProduto = async () => {
+        await api.get("/listar")
+        .then((response) => {
+           setData(response.data)
+        })
+        .catch((error) => {
+            if(error.response){
+                setStatus({
+                    type: "error",
+                    mensagem: error.response.data.mensagem
+                })
+            }else{
+                setStatus({
+                    type: "error",
+                    mensagem: "Erro: Tenta mais tarde!"
+                })
             }
-        ] 
-        setData(produto);
-
-    }
+        });
+    };
+    
 
     useEffect(() =>{
         listarProduto();
@@ -65,14 +62,14 @@ export const Listar = () =>{
             </ConteudoTitulo>
 
             {status.type === "success" ? <AlertSucess>{status.mensagem}</AlertSucess> : ""}
-
+            {status.type === 'error' ? <AlertError>{status.mensagem}</AlertError> :""}
             
             <Table>
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Valor</th>
+                        <th>Preço</th>
                         <th>Quantidade</th>
                         <th>Funções</th>
                     </tr>
@@ -82,7 +79,7 @@ export const Listar = () =>{
                         <tr key={produto.id}>
                             <td>{produto.id}</td>
                             <td>{produto.nome}</td>
-                            <td>{produto.valor}</td>
+                            <td>{produto.preco_venda}</td>
                             <td>{produto.quantidade}</td>
                             <td>
                                 <Link to={"/visualizar/" + produto.id} ><ButtonVisualizar>Visualizar</ButtonVisualizar></Link>
