@@ -7,39 +7,52 @@ import {
     Hr, ButtonSuccess, Form, Label, 
     Input, AlertError } from '../../styles/styles_global'
 import { Link } from "react-router-dom"
+import api from "../../config/configApi"
 
 
 export const Cadastrar = () =>{
 
     const [produto, setProduto] = useState({
         nome: '',
-        valor: '',
+        preco_venda: '',
+        preco_compra: '',
         quantidade: ''
     })
 
-    const [status, setStatus] = useState({
-        type: '',
-        mensagem:''
-    })
-
-    const valueInput = e => setProduto({
+    const sendValueInput = e => setProduto({
          ...produto,
           [e.target.name]: e.target.value
         })
 
     const addProduto = async e => {
         e.preventDefault()
-        console.log("Nome: " + produto.nome)
-        // setStatus({
-        //     type: 'error',
-        //     mensagem: 'Erro: Produto Não Cadastrado.'
-        // });
-        setStatus({
-            type: 'redSuccess',
-            mensagem: 'Produto Cadastrado Com Sucesso!'
-        })
+        
+        try{
+            const response = await api.post('/cadastrar', produto);
+            setStatus({
+                type: "success",
+                mensagem: "Produto Cadastrado Com Sucesso!"
+            })
+        } catch(error) {
+            if(error.response){
+                setStatus({
+                    type: 'error',
+                    mensagem: error.response.data.mensagem
+                });
+            } else {
+                setStatus({
+                    type: 'error',
+                    mensagem: 'Erro: Produto não Cadastrado. Tente Novamente.'
+                })
+            }
+        }
         
     }
+
+    const [status, setStatus] = useState({
+        type: '',
+        mensagem:''
+    })
 
     return(
         <Container>
@@ -70,14 +83,23 @@ export const Cadastrar = () =>{
                 <Input 
                     type="text" name="nome" 
                     placeholder="Nome Do Produto" 
-                    onChange={valueInput}
+                    onChange={sendValueInput}
+                /> <br></br>
+                
+                <Label>Preço de Compra:</Label>
+                <Input 
+                    type="text" 
+                    name="preco_compra" 
+                    placeholder="Preço de Compra" 
+                    onChange={sendValueInput}
                 /> <br></br>
 
                 <Label>Preço:</Label>
                 <Input 
-                    type="text" name="valor" 
+                    type="text" 
+                    name="preco_venda" 
                     placeholder="Preço Do Produto" 
-                    onChange={valueInput}
+                    onChange={sendValueInput}
                 /> <br></br>
                 
                 <Label>Quantidade:</Label>
@@ -85,9 +107,9 @@ export const Cadastrar = () =>{
                     type="number" 
                     name="quantidade" 
                     placeholder="Quantidade De Produtos" 
-                    onChange={valueInput}
+                    onChange={sendValueInput}
                 /> <br></br>
-            
+                
                 <ButtonSuccess type="submit">Cadastrar</ButtonSuccess>
             </Form>
         </Container>

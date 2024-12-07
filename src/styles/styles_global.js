@@ -99,7 +99,7 @@ export const AlertError = styled.p`
     border-radius: 4px;
 `;
 
-export const AlertSucess = styled.p`
+export const AlertSuccess = styled.p`
     background-color: #d1e7dd;
     color: #0f5132;
     margin: 10px 0;

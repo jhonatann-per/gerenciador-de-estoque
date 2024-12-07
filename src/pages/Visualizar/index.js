@@ -1,37 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "../../components/Menu";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams, useLocation} from "react-router-dom";
 import { Container, 
     ConteudoTitulo, 
     Titulo, 
     BotaoAcao, 
     ButtonInfo,
-    Hr
+    Hr, 
+    AlertError , 
+    AlertSuccess
 } from '../../styles/styles_global'
 import { ConteudoVisualizar } from "./styles";
-
+import api from "../../config/configApi";
 
 export const Visualizar = (props) =>{
 
     const {id} = useParams();
     const [data, setData] = useState([])
+    const { state } = useLocation();
+    const [status, setStatus] = useState({
+        type: state ? state.type : "",
+        mensagem: state ? state.mensagem : ""
+    });
 
-    useEffect(() =>{
-        const getProduto = async () => {
-            setData(
-                {
-                    id: 1,
-                    nome: "Teclado",
-                    valor: 120.00,
-                    quantidade: 25
-                },
-                
-            )
-        }
-        getProduto();
+        useEffect(() => {
+            const getProduto = async () => {
+                try {
+                    const response = await api.get(`/visualizar/${id}`);
+                    setData(response.data);
+                    console.log(response.data);
+                } catch (error) {
+                    if (error.response) {
+                        setStatus({
+                            type: "error",
+                            mensagem: "Erro: Dados de produto não encontrado!"
+                        });
+                    } else {
+                        setStatus({
+                            type: "error",
+                            mensagem: "Erro: Falha na solicitação! Tente novamente mais tarde."
+                        });
+                    }
+                }
+            };
+    
+            getProduto();
+        }, [id]);
 
-    },[id])
     
     return(
         <Container>
@@ -42,17 +57,20 @@ export const Visualizar = (props) =>{
                     <Link to="/listar">
                         <ButtonInfo type="button" >Listar</ButtonInfo>
                     </Link>
-                    <Link to={"/editar/" + data.id}>
+                    <Link to="/editar">
                         <ButtonInfo type="button" >Editar</ButtonInfo>
                     </Link>
                 </BotaoAcao>
             </ConteudoTitulo>
             <Hr/>
 
-            <ConteudoVisualizar> ID: {data.id} </ConteudoVisualizar>
+            {status.type === "success" ? <AlertSuccess>{status.mensagem}</AlertSuccess> : ""}
+            {status.type === 'error' ? <AlertError>{status.mensagem}</AlertError> :""}
+
             <ConteudoVisualizar> Produto: {data.nome} </ConteudoVisualizar>
-            <ConteudoVisualizar> Valor: {data.valor} </ConteudoVisualizar>
+            <ConteudoVisualizar> Valor: {data.preco_venda} </ConteudoVisualizar>
             <ConteudoVisualizar> Quantidade: {data.quantidade} </ConteudoVisualizar>
+            <ConteudoVisualizar> Preco De Compra: {data.preco_compra} </ConteudoVisualizar>
         </Container>
     )
 }
