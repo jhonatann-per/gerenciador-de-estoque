@@ -29,13 +29,11 @@ export const Editar = (props) => {
     const getProduto = async () => {
         try {
             const response = await api.get(`/produto/${id}`);
-            console.log('Produto:', response.data); // Verificar dados do produto
             setNome(response.data.nome);
-            setPrecoDeCompra(response.data.preco_compra); // Usar preco_compra corretamente
+            setPrecoDeCompra(response.data.preco_compra);
             setValor(response.data.preco_venda);
             setQuantidade(response.data.quantidade);
         } catch (error) {
-            console.error('Erro ao buscar produto:', error); // Log do erro
             setStatus({
                 type: "error",
                 mensagem: "Erro: Não foi possível buscar os dados do produto."
@@ -55,7 +53,6 @@ export const Editar = (props) => {
             return;
         }
 
-        console.log('Atualizando produto:', { id, nome, preco_compra: precoCompraFloat, preco_venda: precoVendaFloat, quantidade }); // Verificar dados da atualização
         try {
             const response = await api.put('/editar-produto', {
                 id,
@@ -64,16 +61,16 @@ export const Editar = (props) => {
                 preco_venda: precoVendaFloat,
                 quantidade
             });
-            console.log('Resposta da atualização:', response.data); // Verificar resposta da atualização
+            console.log('Resposta da atualização:', response.data); 
             setStatus({
                 type: 'success',
                 mensagem: 'Produto atualizado com sucesso!'
             });
         } catch (error) {
-            console.error('Erro ao atualizar produto:', error); // Log do erro
+            console.error('Erro ao atualizar produto:', error); 
             setStatus({
                 type: 'error',
-                mensagem: error.response ? error.response.data.mensagem : 'Erro ao atualizar produto. Tente novamente mais tarde.'
+                mensagem: 'Erro ao atualizar produto. Tente novamente mais tarde.'
             });
         }
     }

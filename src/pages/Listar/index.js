@@ -41,12 +41,7 @@ export const Listar = () => {
         listarProduto();
     }, [])
 
-    const confirmarApagar = (produto) => {
-        const confirmacao = window.confirm(`Tem certeza que deseja apagar o produto?\n\nID: ${produto.id}\nNome: ${produto.nome}\nPreço: ${produto.preco_venda}`);
-        if (confirmacao) {
-            apagarProduto(produto.id);
-        }
-    }
+   
 
     const apagarProduto = async (idProduto) => {
         try {
@@ -61,6 +56,13 @@ export const Listar = () => {
                 type: "error",
                 mensagem: "Erro ao apagar produto!"
             })
+        }
+    }
+    
+    const confirmarApagar = (produto) => {
+        const confirmacao = window.confirm(`Tem certeza que deseja apagar o produto?\n\nID: ${produto.id}\nNome: ${produto.nome}\nPreço: ${produto.preco_venda}`);
+        if (confirmacao) {
+            apagarProduto(produto.id);
         }
     }
 

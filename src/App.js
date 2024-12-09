@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
 import { Dashboard } from "./pages/Dashboard";
 import { Listar } from "./pages/Listar";
 import { Visualizar } from "./pages/Visualizar";
@@ -11,7 +12,8 @@ const App = () => {
     <div>
      <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/dashboard" element={<Dashboard />}/>
         <Route path="/cadastrar" element={<Cadastrar />} />
         <Route path="/editar/:id" element={<Editar />} />
         <Route path="/listar" element={<Listar />} />

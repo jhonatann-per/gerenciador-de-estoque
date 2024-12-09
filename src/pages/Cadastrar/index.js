@@ -57,7 +57,6 @@ export const Cadastrar = () =>{
     return(
         <Container>
             <Menu/>
-            
             <ConteudoTitulo>
                 <Titulo>Cadastrar</Titulo>
                 <BotaoAcao>

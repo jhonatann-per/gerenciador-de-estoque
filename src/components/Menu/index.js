@@ -1,12 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { NavList } from "./styles";
+import { Link } from "react-router-dom";
+import { Header, NavList, Button } from "./styles";
 
 export const Menu = () => {
-    return(
-        <NavList>
-            <NavLink to="/listar"><li>Listar</li></NavLink>
-            <NavLink to="/"><li>Dashboard</li></NavLink>
-        </NavList> 
-    )
-}
+    return (
+        <Header>
+            <NavList>
+                <Button><Link to="/listar">Listar</Link></Button>
+                <Button><Link to="/cadastrar">Cadastrar</Link></Button>
+                <Button><Link to="/dashboard">Dashboard</Link></Button>
+            </NavList>
+        </Header>
+    );
+};

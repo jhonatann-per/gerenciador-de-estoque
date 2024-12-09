@@ -7,7 +7,7 @@ export const Dashboard = () => {
     return(
         
        <Container>
-            <Menu></Menu>
+            <Menu />
             <ConteudoTitulo>
                 <Titulo>Dashboard</Titulo>
             </ConteudoTitulo>
