@@ -28,7 +28,7 @@ export const Editar = (props) => {
 
     const getProduto = async () => {
         try {
-            const response = await api.get(`/produto/${id}`);
+            const response = await api.get(`/visualizar/${id}`);
             setNome(response.data.nome);
             setPrecoDeCompra(response.data.preco_compra);
             setValor(response.data.preco_venda);

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 export const Header = styled.header`
     display: flex;
     justify-content: center;
@@ -36,7 +36,7 @@ export const NavList = styled.div`
     width: 100%;
 `;
 
-export const Button = styled.div`
+export const Button = styled(Link)`
     background-color: transparent;
     border-radius: 5px;
     color: white;
@@ -45,20 +45,19 @@ export const Button = styled.div`
     margin: 0 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-
-    a {
-        text-decoration: none;
-        color: white;
-    }
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
         background-color: white;
         color: black;
         border-color: black;
+    }
 
-        a {
-            color: black;
-        }
+    &:focus {
+        outline: none;
     }
 
     @media (max-width: 960px) {
