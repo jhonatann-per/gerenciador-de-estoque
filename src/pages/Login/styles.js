@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import fundoGif from '../../assets/fundo.gif';
 
 export const Container = styled.div`
@@ -22,19 +22,48 @@ export const LoginComponent = styled.div`
     justify-content: center;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.8);
+
+    @media (max-width: 1200px) {
+        width: 40%;
+    }
+
+    @media (max-width: 900px) {
+        width: 50%;
+    }
+
+    @media (max-width: 768px) {
+        width: 60%;
+    }
+
+    @media (max-width: 480px) {
+        width: 75%;
+    }
+
+    @media (max-width: 340px) {
+        width: 90%;
+    }
 `;
 
 export const CamposInput = styled.input`
     margin: 10px 0;
     padding: 10px;
-    width: 100%;
+    width: calc(100% - 20px); 
     border: 1px solid white;
     background-color: #444;
     color: white;
+
+    @media (max-width: 480px) {
+        padding: 8px;
+    }
+
+    @media (max-width: 340px) {
+        padding: 6px;
+    }
 `;
 
+
 export const EnviarButton = styled.button`
-    margin: 20px 0;
+    margin-top: 18px;
     padding: 10px 28px;
     border: 1px solid white;
     background-color: #61dafb;
@@ -44,5 +73,13 @@ export const EnviarButton = styled.button`
 
     &:hover {
         background-color: #21a1f1;
+    }
+
+    @media (max-width: 480px) {
+        padding: 8px 24px;
+    }
+
+    @media (max-width: 340px) {
+        padding: 6px 20px;
     }
 `;
