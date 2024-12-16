@@ -18,7 +18,13 @@ export const Visualizar = (props) => {
     useEffect(() => {
         const getProduto = async () => {
             try {
-                const response = await api.get(`/visualizar/${id}`);
+                const headers = {
+                    'headers': {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                };
+
+                const response = await api.get(`/visualizar/${id}`, headers);
                 setData(response.data);
                 console.log(response.data);
             } catch (error) {

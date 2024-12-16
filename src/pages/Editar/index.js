@@ -27,8 +27,14 @@ export const Editar = (props) => {
     }, [id]);
 
     const getProduto = async () => {
+        const headers = {
+            'headers': {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        };
+
         try {
-            const response = await api.get(`/visualizar/${id}`);
+            const response = await api.get(`/visualizar/${id}`, headers);
             setNome(response.data.nome);
             setPrecoDeCompra(response.data.preco_compra);
             setValor(response.data.preco_venda);
@@ -43,6 +49,7 @@ export const Editar = (props) => {
 
     const editarProduto = async e => {
         e.preventDefault();
+        
         const precoCompraFloat = parseFloat(precoDeCompra);
         const precoVendaFloat = parseFloat(valor);
         if (isNaN(precoCompraFloat) || isNaN(precoVendaFloat)) {
@@ -54,13 +61,18 @@ export const Editar = (props) => {
         }
 
         try {
+            const headers = {
+                'headers': {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            };
             const response = await api.put('/editar-produto', {
                 id,
                 nome,
                 preco_compra: precoCompraFloat,
                 preco_venda: precoVendaFloat,
                 quantidade
-            });
+            }, headers);
             console.log('Resposta da atualização:', response.data); 
             setStatus({
                 type: 'success',

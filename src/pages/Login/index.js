@@ -34,6 +34,7 @@ export const Login = () => {
 
         await api.post("/login", user, headers)
         .then((response) => {
+            localStorage.setItem('token', response.data.token)
             setStatus({ type: 'success', mensagem: 'Login bem-sucedido!', loading: false });
             navigate("/dashboard", { state: { type: 'success', mensagem: 'Login bem-sucedido!' } });
         }).catch((err) => {

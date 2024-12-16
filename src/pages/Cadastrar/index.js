@@ -26,9 +26,15 @@ export const Cadastrar = () =>{
 
     const addProduto = async e => {
         e.preventDefault()
+
+        const headers = {
+            'headers': {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        };
         
         try{
-            const response = await api.post('/cadastrar', produto);
+            const response = await api.post('/cadastrar', produto, headers,);
             setStatus({
                 type: "success",
                 mensagem: "Produto Cadastrado Com Sucesso!"
