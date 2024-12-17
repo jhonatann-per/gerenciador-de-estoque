@@ -21,12 +21,39 @@ const AuthProvider = ({ children }) => {
         getLogin();
     }, []);
 
+    const valUser = async () =>{
+        const valueToken = localStorage.getItem('token')
+        const headers = {
+            'headers': {
+                'Authorization': 'Bearer ' + valueToken
+            }
+        };
+
+        api.get("/val-token", headers)
+        .then(() =>{
+            return true
+        }).catch(() =>{
+            localStorage.removeItem('token');
+            setAuthenticated(false);
+            return false;
+        })
+    }
+
     if (loading) {
         return <h1>Carregando</h1>;
+    };
+ 
+    const signIn = (sit) =>{
+        setAuthenticated(sit)
+    }
+    const handleLogout = () => {
+        setAuthenticated(false);
+        localStorage.removeItem('token');
+        api.defaults.headers.Authorization = undefined;
     }
 
     return (
-        <Context.Provider value={{ authenticated }}>
+        <Context.Provider value={{ authenticated, signIn, handleLogout, valUser }}>
             {children}
         </Context.Provider>
     );

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, LoginComponent, CamposInput, EnviarButton } from "./styles";
 import { AlertError, AlertSuccess } from "../../styles/styles_global";
 import api from "../../config/configApi";
+import { Context } from "../../Context/AuthContext";
 
 export const Login = () => {
+    const { signIn } = useContext(Context);
     const navigate = useNavigate();
     
     const [user, setUser] = useState({
@@ -35,8 +37,17 @@ export const Login = () => {
         await api.post("/login", user, headers)
         .then((response) => {
             localStorage.setItem('token', response.data.token)
-            setStatus({ type: 'success', mensagem: 'Login bem-sucedido!', loading: false });
-            navigate("/dashboard", { state: { type: 'success', mensagem: 'Login bem-sucedido!' } });
+            signIn(true);
+            setStatus({ 
+                type: 'success', 
+                mensagem: 'Login bem-sucedido!', 
+                loading: false 
+            });
+            navigate("/dashboard", 
+                { state: { 
+                    type: 'success', 
+                    mensagem: 'Login bem-sucedido!' 
+            } });
         }).catch((err) => {
             if (err.response) {
                 setStatus({
@@ -47,7 +58,7 @@ export const Login = () => {
             } else {
                 setStatus({
                     type: 'error',
-                    mensagem: 'Erro: Produto não cadastrado. Tente novamente.',
+                    mensagem: 'Erro: Usuário não encontrado. Tente novamente.',
                     loading: false
                 });
             }

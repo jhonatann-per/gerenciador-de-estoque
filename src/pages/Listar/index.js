@@ -5,8 +5,8 @@ import { Container, ConteudoTitulo, Titulo, BotaoAcao, ButtonSuccess, ButtonVisu
 import { Table, ButtonEditar, ButtonApagar, AlertSucess } from "./styles";
 import api from "../../config/configApi";
 
-export const Listar = () => {
 
+export const Listar = () => {
     const { state } = useLocation();
     const [status, setStatus] = useState({
         type: state ? state.type : "",
@@ -104,7 +104,7 @@ export const Listar = () => {
                             <tr key={produto.id}>
                                 <td>{produto.id}</td>
                                 <td>{produto.nome}</td>
-                                <td>{produto.preco_venda}</td>
+                                <td>R${produto.preco_venda},00</td>
                                 <td>{produto.quantidade}</td>
                                 <td>
                                     <Link to={"/visualizar/" + produto.id}><ButtonVisualizar>Visualizar</ButtonVisualizar></Link>
