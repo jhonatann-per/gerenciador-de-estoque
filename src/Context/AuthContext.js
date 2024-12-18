@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
         const getLogin = async () => {
             const token = localStorage.getItem('token');
 
-            if (token) {
+            if (token && valUser()) {
                 api.defaults.headers.Authorization = `Bearer ${token}`;
                 setAuthenticated(true);
             }
@@ -21,8 +21,8 @@ const AuthProvider = ({ children }) => {
         getLogin();
     }, []);
 
-    const valUser = async () =>{
-        const valueToken = localStorage.getItem('token')
+    const valUser = async () => {
+        const valueToken = localStorage.getItem('token');
         const headers = {
             'headers': {
                 'Authorization': 'Bearer ' + valueToken
@@ -30,27 +30,28 @@ const AuthProvider = ({ children }) => {
         };
 
         api.get("/val-token", headers)
-        .then(() =>{
-            return true
-        }).catch(() =>{
-            localStorage.removeItem('token');
-            setAuthenticated(false);
-            return false;
-        })
-    }
+            .then(() => {
+                return true;
+            }).catch(() => {
+                localStorage.removeItem('token');
+                setAuthenticated(false);
+                return false;
+            });
+    };
 
     if (loading) {
         return <h1>Carregando</h1>;
     };
- 
-    const signIn = (sit) =>{
-        setAuthenticated(sit)
-    }
+
+    const signIn = (sit) => {
+        setAuthenticated(sit);
+    };
+
     const handleLogout = () => {
         setAuthenticated(false);
         localStorage.removeItem('token');
         api.defaults.headers.Authorization = undefined;
-    }
+    };
 
     return (
         <Context.Provider value={{ authenticated, signIn, handleLogout, valUser }}>

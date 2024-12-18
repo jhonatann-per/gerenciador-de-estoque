@@ -12,7 +12,9 @@ import { Context } from "../Context/AuthContext";
 
 const PrivateRoute = ({ element, ...rest }) => {
   const { authenticated, valUser } = useContext(Context);
+  valUser();
   return authenticated ? element : <Navigate to="/" />;
+
 };
 
 const RoutesAdm = () => {
